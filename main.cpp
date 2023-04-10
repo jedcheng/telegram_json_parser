@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 #include <future>
-#include <algorithm>
+#include <chrono> 
 
-
+using namespace std::chrono; 
 using namespace simdjson;
 using namespace std;
 
@@ -17,10 +17,8 @@ int main(int argc, char *argv[]) {
     string_view file_name(argv[1]); /*file name*/
     string_view str_message;
     
-    // count how many message is found
-    int count;
-    
-    
+    auto start = high_resolution_clock::now();
+
     // initlize the json parser
     ondemand::parser parser;
     padded_string json = padded_string::load(file_name);
@@ -58,6 +56,12 @@ int main(int argc, char *argv[]) {
         }
     }
     
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+
+    // convert the time to seconds
+    double time_taken = duration.count() * 1e-6;
+    cout << "Time taken by function: " << time_taken << " seconds" << endl;
 
 
 
@@ -89,11 +93,13 @@ int main(int argc, char *argv[]) {
             cout << "No result found" << endl;
         }
         else{
+            cout << "Found " << result.size() << " results" << endl << endl << endl;
             for (auto& str: result){
                 cout << str << endl;
             }
         }
         
+        cout << endl << endl << endl;
         result.clear();
 
     }

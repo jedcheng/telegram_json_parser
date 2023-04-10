@@ -4,6 +4,10 @@ This is a (very) simple CLI tool to parser and search for messages in a json fil
 
 It should work for mac and linux. I don't have a windows machine.
 
+## Why don't you just use the built-in search function in Telegram?
+The built-in search function in Telegram is awful for Chinese because it only considers words between spaces/plunctuation as a word. For example, if you have a message "你好，世界", the built-in search function returns nothing if you search for "你" or "世". The only way to find this message is to search for "你好" or "世界". This program solves this problem by parsing the json file and searching for the keyword in the message.
+
+
 ## Usage
 
 1. Download the official Telegram desktop client [official Telegram client](https://desktop.telegram.org/) . As far as I know, this is not supported by any third party clients.
